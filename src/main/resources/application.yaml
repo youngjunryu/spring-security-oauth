@@ -1,6 +1,4 @@
 spring:
-  main:
-    allow-bean-definition-overriding: true
   jpa:
     database: h2
     open-in-view: false
