@@ -4,28 +4,34 @@ spring:
   jpa:
     database: h2
     open-in-view: false
+    show-sql: true
     hibernate:
       ddl-auto: create
     properties:
       hibernate:
-        show-sql: true
         format-sql: true
         dialect: org.hibernate.dialect.H2Dialect
   security:
-    oauth2.client:
-      registration:
-        google:
-          client-id: ${google.client-id}
-          client-secret: ${google.client-secret}
-          scope:
-            - email
-            - profile
-jwt:
-  header: Authorization
-  issuer: jeff
-  client-secret: ${jwt.token-secret}
-  expiry-seconds: 1800000
-  blacklist-prefix: blacklist
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${google.client-id}
+            client-secret: ${google.client-secret}
+            scope:
+              - email
+              - profile
+app:
+  auth:
+    header: Authorization
+    issuer: jeff
+    client-secret: ${jwt.token-secret}
+    expiry-seconds: 1800000
+    blacklist-prefix: blacklist
+  oauth2:
+    authorized-redirect-uris:
+      - http://localhost:8080/auth/redirect
+
 redis:
   host: localhost
   port: 6379
